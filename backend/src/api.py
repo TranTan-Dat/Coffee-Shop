@@ -31,7 +31,7 @@ with app.app_context():
 '''
 @app.route('/drinks', methods=['GET'])
 @requires_auth(permission='get:drinks')
-def get_drinks():
+def get_drinks(payload):
     drinks = Drink.query.all()
     print(drinks)
     short_drinks = [drink.short() for drink in drinks]
@@ -124,6 +124,7 @@ def update_drink(payload, id):
             'drinks': [drink.long()]
         }), 200
     except Exception as e:
+        print(e)
         abort(500)
 
 
@@ -151,6 +152,7 @@ def delete_drink(payload, id):
             'delete': id
         }), 200
     except Exception as e:
+        print(e)
         abort(500)
 
 
